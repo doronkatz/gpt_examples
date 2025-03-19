@@ -1,4 +1,4 @@
-openai==1.14.1
+openai
 python-dotenv==1.0.0
 
 # For Chap3_02_YoutubeSummarizerVision

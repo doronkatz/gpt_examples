@@ -1,19 +1,23 @@
+import os  # Import the os module for environment variable access
+import openai  # Correct import for the OpenAI library
 from dotenv import load_dotenv
 
-import os
-from openai import OpenAI
-
+# Load environment variables from a .env file
 load_dotenv()
 
-client = OpenAI()
+# Remove the undefined OpenAI client initialization
+# Use the openai module directly for API calls
 
-# Make sure the environment variable OPENAI_API_KEY is set.
+# Set your OpenAI API key
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
-# Call the openai ChatCompletion endpoint, with th ChatGPT model
-response = client.chat.completions.create(model="gpt-3.5-turbo",
-messages=[
-      {"role": "user", "content": "Hello World!"}
-  ])
+completion = openai.chat.completions.create(
+    model="gpt-4o",
+    messages=[{
+        "role": "user",
+        "content": "Write a one-sentence bedtime story about a unicorn."
+    }]
+)
 
-# Extract the response
-print(response.choices[0].message.content)
+# Print the response
+print(completion.choices[0].message.content)
