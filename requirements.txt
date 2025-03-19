@@ -26,10 +26,10 @@ wikipedia==1.4.0
 langchainhub==0.1.15
 
 # For Chapt5_02_LangChainPDF
-tiktoken==0.4.0
+tiktoken==0.5.2
 faiss-cpu==1.7.4
 
 # For Chap5 LlamaIndex
-llama-index==0.10.18
-weaviate-client==4.5.5
+llama-index
+weaviate-client
 llama-index-vector-stores-weaviate==0.1.4
