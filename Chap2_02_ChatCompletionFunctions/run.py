@@ -1,10 +1,12 @@
+import os  # Import the os module for environment variable access
+import openai  # Correct import for the OpenAI library
 from dotenv import load_dotenv
+import json
 
 load_dotenv()
-from openai import OpenAI
 
-client = OpenAI()
-import json
+# Set your OpenAI API key
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 def find_product(sql_query):
@@ -32,12 +34,12 @@ function_find_product = {
     }
 
 
-
 def run(user_question):
     # Send the question and available functions to GPT
     messages = [{"role": "user", "content": user_question}]
 
-    response = client.chat.completions.create(model="gpt-3.5-turbo-0613", messages=messages, tools=[{"type": "function", "function": function_find_product }])
+    response = openai.chat.completions.create(model="gpt-4o", 
+        messages=messages, tools=[{"type": "function", "function": function_find_product }])
     response_message = response.choices[0].message
 
     # Append the assistant's response to the messages
@@ -63,7 +65,7 @@ def run(user_question):
         }
     )
     # Get a new response from GPT so it can format the function's response into natural language
-    second_response = client.chat.completions.create(model="gpt-3.5-turbo-0613",
+    second_response = openai.chat.completions.create(model="gpt-4o",
     messages=messages)
     return second_response.choices[0].message.content
 

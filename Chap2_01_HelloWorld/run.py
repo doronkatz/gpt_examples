@@ -13,10 +13,24 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 completion = openai.chat.completions.create(
     model="gpt-4o",
-    messages=[{
-        "role": "user",
-        "content": "Write a one-sentence bedtime story about a unicorn."
-    }]
+    messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful teacher."
+        },
+        {
+            "role": "user",
+            "content": "Are there other measures that than time for complexity for an algorithm?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes there are other complexities besides time complexity for an algorithm, such as space complexity."
+        },
+        {
+            "role": "user",
+            "content": "What is it?"
+        }
+    ]
 )
 
 # Print the response
