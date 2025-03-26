@@ -1,7 +1,11 @@
 import gradio as gr
 import whisper
-from openai import OpenAI
+import os  # Import the os module for environment variable access
+import openai  # Correct import for the OpenAI library
 from dotenv import load_dotenv
+
+# Set your OpenAI API key
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 load_dotenv()
 
@@ -45,12 +49,11 @@ class Discussion:
                                'content': f'{starting_prompt}'}]) -> None:
         self.state = state
         self.messages_history = messages_history
-        self.client = OpenAI()
         self.stt_model = whisper.load_model("base")
         pass
 
     def generate_answer(self, messages):
-        response = self.client.chat.completions.create(
+        response = openai.chat.completions.create(
             model="gpt-4-turbo",
             messages=messages)
         return (response.choices[0].message.content)
